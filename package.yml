@@ -1,0 +1,8 @@
+name: QFocuser
+filename: qfocuser.js
+description: Native focus behaviour emulator
+license: MIT-Style License, http://mootools.net/license
+copyright: 2009 Daniel Steigerwald, daniel.steigerwald.cz
+authors: Daniel Steigerwald
+sources:
+  - Source/QFocuser.js

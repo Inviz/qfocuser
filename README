@@ -1,0 +1,63 @@
+QFocuser 0.95 - class for keyboard navigable AJAX widgets for better usability and accessibility
+
+    Features:
+            - allow to your widget listen key events when its focused
+            - focus can be enabled on any element
+            - fires focus and blur events (so your table row will NOT remain highlighted after click out of table for example)
+            - make your widget to be accessible by tab key
+            - tiny and library agnostic
+            - this implementation could serve as a model for the others
+            - works also in Safari!
+
+    Tested on: IE6/7, FF2/3, Safari, Webkit, Opera and Chrome
+    
+Key navigation is important part in overall usability and accessibility of all applications.
+    If you have only one widget, key events can be safely attached to document, but if more than one widgets
+    are involved, each widget has to react to keyboard separately, which means when it has focus.
+    Also, each widget has to react when focus is lost (remove highlighted row for example).
+    There is no another solution than listen blur event. Any other solution based e.g. on mouseclick will fail with iframes.
+
+    .. read this: http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/writing-your-own-widget-class/creating-accessi
+
+    How it should work: 
+            Key tab switches between your widgets, in order defined by tabIndex. Focused widget can listen key events.
+
+    How it work: 
+            To make elements focusable, set them tabindex. That will allow you to attach keyboard events to them too.
+            The tabindex value can allow for some interesting behavior. If given a value of "-1", the element can't be tabbed 
+            to but focus can be given to the element programmatically (using element.focus()).
+            If given a value of 0, the element can be focused via the keyboard and falls into the tabbing flow of the document.
+            Values greater than 0 create a priority level with 1 being the most important.
+
+    Safari issue:
+            Current version of safari doesn't support tabIndex for regular elements. WebKit nightly build does.
+            This library has a workaround for it, to have almost same behavior.
+
+    Hiding the Browsers Focus Borders issue:
+            All browser including IE6/7 will show pesky dotted borders around focused elements for accessibility reasons.
+            The dotted visual clutters up the design. To remove them, use options doNotShowBrowserFocusDottedBorder.
+            It has to be done in code, because Internet Explorer has no style property for that. If you are remove them, do not
+            forget use own focused element highlighting.
+    
+    Example:
+
+            var focuser = new QFocuser(widgetContainer, {
+                    onFocus: function(focusedEl) { .. add highlighted class or whatever }
+                    onBlur: function(focusedEl) { .. remove highlighted class or whatever }
+                    onKeydown: e.g. handleArrows...
+            });
+            // attach your own keys listeners
+            $(focuser.getEl()).addEvent('keydown', e.g. handleArrows);
+            // when your widget decided to set the focus (and then receive key events)
+            focuser.focus(tableRowForExample);
+
+    Links:
+
+            http://snook.ca/archives/accessibility_and_usability/elements_focusable_with_tabindex/
+            http://wiki.codetalks.org/wiki/index.php/Docs/Keyboard_navigable_JS_widgets
+            http://dev.aol.com/dhtml_style_guide - recommended key shortcuts
+            http://fluidproject.org/blog/2008/01/09/getting-setting-and-removing-tabindex-values-with-javascript/
+
+    License: MIT-style license. Copyright: Copyright (c) 2009 Daniel Steigerwald, daniel.steigerwald.cz
+
+
