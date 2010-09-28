@@ -204,16 +204,16 @@ var QFocuser = (function() {
                         focuser[method]('focus', onFocusBlur);
                         focuser[method]('blur', onFocusBlur);
                         window[method]('blur', onWindowBlur);
-                        widget[method]('mousedown', onWidgetMousedown);
+                        //widget[method]('mousedown', onWidgetMousedown);
                 };
 
                 // set active simulation
                 function onWidgetMousedown(e) {
-                        //if (widgetState == 'Blur') {
+                        if (widgetState == 'Blur') {
                                 setTimeout(function() {
                                         focuser.focus();
                                 }, 1);
-                        //}
+                        }
                 };
 
                 function onFocusBlur(e) {
