@@ -57,7 +57,7 @@ var QFocuser = (function() {
                 }
 
                 function init() {
-                        setTabIndex(widget, 0);
+                        setTabIndex(widget, options.tabIndex);
                         // IE remembers focus after page reload but don't fire focus
                         if (isIE && widget == widget.ownerDocument.activeElement) widget.blur();
                         toggleEvents(true);
